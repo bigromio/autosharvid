@@ -3,150 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoSharVid - TikTok Publishing Tool</title>
-    <!-- استخدام Tailwind CSS للتصميم الاحترافي والسريع -->
+    <title>AutoSharVid - TikTok Scheduling Platform for Creators</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html { scroll-behavior: smooth; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .fade-in { animation: fadeIn 0.6s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+<body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-blue-200">
 
-    <!-- شريط التنقل العلوي -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="text-2xl font-bold text-slate-800 cursor-pointer" onclick="showTab('home')">
-                    AutoSharVid
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2 cursor-pointer">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">A</div>
+                    <span class="text-2xl font-extrabold text-slate-800 tracking-tight">AutoSharVid</span>
                 </div>
-                <div class="space-x-6 text-sm font-medium text-gray-600">
-                    <button onclick="showTab('home')" class="hover:text-blue-600 focus:outline-none transition">App UI</button>
-                    <button onclick="showTab('privacy')" class="hover:text-blue-600 focus:outline-none transition">Privacy Policy</button>
-                    <button onclick="showTab('terms')" class="hover:text-blue-600 focus:outline-none transition">Terms of Service</button>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-500">
+                    <a href="#features" class="hover:text-blue-600 transition">Features</a>
+                    <a href="#pricing" class="hover:text-blue-600 transition">Pricing</a>
+                    <a href="#agencies" class="hover:text-blue-600 transition">For Agencies</a>
+                </div>
+                <div>
+                    <a href="https://www.tiktok.com/v2/auth/authorize/?client_key=sbawr58okefiivybi3&scope=video.publish,user.info.basic&response_type=code&redirect_uri=https://bigromio.github.io/autosharvid/&state=123" 
+                       class="text-sm font-semibold bg-slate-800 hover:bg-slate-900 text-white py-2 px-5 rounded-full transition shadow-md">
+                        Sign In / Register
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- المحتوى الرئيسي للموقع -->
-    <main class="max-w-4xl mx-auto mt-10 p-4">
-
-        <!-- 1. واجهة التطبيق (التي ستصورها بالفيديو) -->
-        <section id="home" class="tab-content active">
-            <!-- الهيدر الغامق (نفس تصميمك في الصورة) -->
-            <div class="bg-slate-800 text-white text-center py-24 rounded-t-xl shadow-lg relative overflow-hidden">
-                <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-                <h1 class="text-5xl font-light tracking-wide relative z-10">AutoSharVid - <br> TikTok Publishing Tool</h1>
-            </div>
-            
-            <!-- قسم النشر -->
-            <div class="bg-white border border-t-0 border-gray-200 rounded-b-xl shadow-lg p-10 min-h-[300px]">
-    <div id="status-container" class="transition-all duration-500">
-        <a href="https://www.tiktok.com/v2/auth/authorize/?client_key=sbawr58okefiivybi3&scope=video.upload,user.info.basic&response_type=code&redirect_uri=https://bigromio.github.io/autosharvid/&state=123" 
-   class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded shadow transition duration-300 mb-4 inline-block">
-   Login with TikTok
-</a>
+    <main id="hero-section" class="max-w-6xl mx-auto mt-16 px-4 text-center fade-in">
+        <span class="text-blue-600 font-semibold tracking-wider uppercase text-sm mb-4 block">The Ultimate Creator Tool</span>
+        <h1 class="text-5xl md:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
+            Automate & Schedule Your <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">TikTok Content</span> Seamlessly
+        </h1>
+        <p class="text-xl text-gray-500 mb-10 max-w-2xl mx-auto">
+            AutoSharVid empowers creators, marketing agencies, and brands to schedule, manage, and auto-publish TikTok videos at scale. Save hours of manual work.
+        </p>
         
-        <p id="ready-text" class="text-gray-400 text-lg mb-8 font-medium">Your video is ready to be published.</p>
-        
-        <button id="publish-btn" onclick="publishVideo()" disabled class="bg-gray-300 text-white font-semibold py-3 px-8 rounded shadow cursor-not-allowed flex items-center">
-            Publish to TikTok
-        </button>
-    </div>
-
-    <div id="success-message" class="hidden flex-col items-center justify-center py-8">
-        <h3 class="text-2xl font-bold text-gray-800">Video Published Successfully!</h3>
-    </div>
-</div>
-
-<script>
-    function loginUser() {
-        const btn = document.getElementById('login-btn');
-        btn.innerText = "Authenticating...";
-        setTimeout(() => {
-            btn.innerText = "Logged in as Creator ✅";
-            btn.classList.replace('bg-blue-600', 'bg-green-600');
-            // تفعيل زر النشر بعد تسجيل الدخول
-            const pubBtn = document.getElementById('publish-btn');
-            pubBtn.disabled = false;
-            pubBtn.classList.replace('bg-gray-300', 'bg-slate-700');
-            pubBtn.classList.replace('cursor-not-allowed', 'hover:bg-slate-800');
-        }, 1500);
-    }
-</script>
-        <!-- 2. صفحة سياسة الخصوصية -->
-        <section id="privacy" class="tab-content bg-white p-10 rounded-xl shadow-sm border border-gray-100">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-4">Privacy Policy</h2>
-            <div class="prose max-w-none text-gray-600 leading-relaxed space-y-4">
-                <p><strong>Last updated: May 2026</strong></p>
-                <p>AutoSharVid ("we", "our", or "us") operates this website/tool to automate video publishing. This Privacy Policy explains how we collect, use, and protect your information when you use our TikTok integration.</p>
-                
-                <h3 class="text-xl font-semibold text-gray-800 mt-6">1. Information We Collect</h3>
-                <p>When you authenticate with TikTok through our tool, we receive an authorized access token. We DO NOT collect, store, or process your personal data, passwords, or browsing history.</p>
-                
-                <h3 class="text-xl font-semibold text-gray-800 mt-6">2. How We Use Your Information</h3>
-                <p>The TikTok access token is used strictly and exclusively for uploading and publishing videos directly to your TikTok account on your behalf, utilizing the TikTok Content Posting API.</p>
-                
-                <h3 class="text-xl font-semibold text-gray-800 mt-6">3. Data Sharing & Security</h3>
-                <p>We deeply respect your privacy. We do not sell, trade, or transfer your information to any outside parties. We implement strict security measures in our automated workflows to protect your access tokens. Tokens are securely processed and never exposed publicly.</p>
-            </div>
-        </section>
-
-        <!-- 3. صفحة شروط الخدمة -->
-        <section id="terms" class="tab-content bg-white p-10 rounded-xl shadow-sm border border-gray-100">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-4">Terms of Service</h2>
-            <div class="prose max-w-none text-gray-600 leading-relaxed space-y-4">
-                <p><strong>Last updated: May 2026</strong></p>
-                <p>Welcome to AutoSharVid. By accessing or using our automated video publishing tool, you agree to be bound by these Terms of Service.</p>
-                
-                <h3 class="text-xl font-semibold text-gray-800 mt-6">1. Description of Service</h3>
-                <p>AutoSharVid provides an automated workflow solution that allows users to render videos and publish them directly to their authenticated TikTok accounts using the TikTok Content Posting API.</p>
-                
-                <h3 class="text-xl font-semibold text-gray-800 mt-6">2. User Responsibilities</h3>
-                <ul class="list-disc pl-6 space-y-2">
-                    <li>You are solely responsible for the content you publish through our tool.</li>
-                    <li>You agree to comply strictly with TikTok's Community Guidelines and Terms of Service.</li>
-                    <li>You must not use our tool to upload spam, copyrighted material without permission, or any content that violates TikTok's policies.</li>
-                </ul>
-                
-                <h3 class="text-xl font-semibold text-gray-800 mt-6">3. Limitation of Liability</h3>
-                <p>AutoSharVid is provided "as is". We are not responsible for any account bans, content removals, or penalties imposed by TikTok resulting from your use of our tool. We reserve the right to terminate access if you breach these Terms.</p>
-            </div>
-        </section>
-
+        <div class="flex justify-center gap-4">
+            <a href="https://www.tiktok.com/v2/auth/authorize/?client_key=sbawr58okefiivybi3&scope=video.publish,user.info.basic&response_type=code&redirect_uri=https://bigromio.github.io/autosharvid/&state=123" 
+               class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transition transform hover:-translate-y-1">
+                Connect TikTok Account
+            </a>
+            <button onclick="showDashboard()" class="bg-white border-2 border-slate-200 hover:border-slate-300 text-slate-700 font-bold text-lg py-4 px-8 rounded-xl transition shadow-sm">
+                View Interactive Demo
+            </button>
+        </div>
     </main>
 
-    <footer class="text-center text-gray-400 text-sm mt-12 mb-6">
-        &copy; 2026 AutoSharVid. All rights reserved.
+    <section id="features" class="max-w-6xl mx-auto mt-24 px-4 pb-20 fade-in">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-6 text-2xl">🗓️</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Smart Scheduling</h3>
+                <p class="text-gray-500">Plan your content calendar weeks in advance. Set the exact date and time for your videos to go live automatically.</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <div class="w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center mb-6 text-2xl">👥</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Multi-Account Support</h3>
+                <p class="text-gray-500">Perfect for agencies. Manage multiple creator accounts from a single dashboard without constantly logging in and out.</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center mb-6 text-2xl">⚡</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">API-Driven Publishing</h3>
+                <p class="text-gray-500">Utilizing the official TikTok Content Posting API ensuring secure, fast, and fully compliant video delivery.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard-demo" class="hidden max-w-4xl mx-auto mt-10 px-4 pb-20 fade-in">
+        <div class="bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-slate-800 px-6 py-4 flex justify-between items-center">
+                <h2 class="text-white font-bold text-lg">Creator Dashboard - New Post</h2>
+                <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">Connected: @RamyAmer</span>
+            </div>
+            <div class="p-8">
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Upload Video File</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-10 text-center hover:bg-gray-50 cursor-pointer transition">
+                        <span class="text-gray-500">Drag & drop your MP4 file here, or click to browse</span>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Caption & Hashtags</label>
+                    <textarea class="w-full border border-gray-300 rounded-lg p-3 focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Write an engaging caption..."></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Schedule Date</label>
+                        <input type="date" class="w-full border border-gray-300 rounded-lg p-3">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Schedule Time</label>
+                        <input type="time" class="w-full border border-gray-300 rounded-lg p-3">
+                    </div>
+                </div>
+                <div class="flex justify-end gap-3">
+                    <button onclick="hideDashboard()" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 font-medium transition">Cancel</button>
+                    <button onclick="simulateScheduling()" id="schedule-btn" class="px-6 py-3 bg-blue-600 rounded-lg text-white font-bold hover:bg-blue-700 transition flex items-center">
+                        Schedule Video
+                    </button>
+                </div>
+                <div id="success-alert" class="hidden mt-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg relative">
+                    <strong class="font-bold">Success!</strong>
+                    <span class="block sm:inline"> Your video has been scheduled to the queue.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t border-gray-200 mt-12 py-10">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="text-gray-500 text-sm mb-4 md:mb-0">
+                &copy; 2026 AutoSharVid Platform. All rights reserved.
+            </div>
+            <div class="flex space-x-6 text-sm">
+                <a href="https://bigromio.github.io/autosharvid/privacy_policy" class="text-gray-500 hover:text-blue-600 transition">Privacy Policy</a>
+                <a href="https://bigromio.github.io/autosharvid/terms_of_service" class="text-gray-500 hover:text-blue-600 transition">Terms of Service</a>
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition">Help Center</a>
+            </div>
+        </div>
     </footer>
 
-    <!-- سكربت التنقل بين الصفحات وتأثير زر النشر -->
     <script>
-        function showTab(tabId) {
-            // إخفاء كل الأقسام
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            // إظهار القسم المطلوب
-            document.getElementById(tabId).classList.add('active');
+        // دوال للتحكم في واجهة الديمو لإقناع المراجع
+        function showDashboard() {
+            document.getElementById('hero-section').style.display = 'none';
+            document.getElementById('features').style.display = 'none';
+            document.getElementById('dashboard-demo').style.display = 'block';
             window.scrollTo(0, 0);
         }
 
-        // تأثير وهمي لزر النشر (مفيد جداً لتصوير فيديو تيك توك)
-        function publishVideo() {
-            const btn = document.getElementById('publish-btn');
-            btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Publishing...`;
-            btn.classList.add('opacity-75', 'cursor-not-allowed');
+        function hideDashboard() {
+            document.getElementById('dashboard-demo').style.display = 'none';
+            document.getElementById('hero-section').style.display = 'block';
+            document.getElementById('features').style.display = 'block';
+            document.getElementById('success-alert').classList.add('hidden');
+        }
+
+        function simulateScheduling() {
+            const btn = document.getElementById('schedule-btn');
+            btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Scheduling...`;
+            btn.disabled = true;
+            btn.classList.add('opacity-75');
             
-            // انتظار 2 ثانية ثم إظهار رسالة النجاح
             setTimeout(() => {
-                document.getElementById('status-container').classList.add('hidden');
-                document.getElementById('success-message').classList.remove('hidden');
-                document.getElementById('success-message').classList.add('flex');
-            }, 2000);
+                btn.innerHTML = 'Schedule Video';
+                btn.disabled = false;
+                btn.classList.remove('opacity-75');
+                document.getElementById('success-alert').classList.remove('hidden');
+            }, 1500);
         }
     </script>
 </body>
