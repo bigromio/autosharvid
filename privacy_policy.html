@@ -4,28 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - AutoSharVid</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-w-3xl; margin: 0 auto; padding: 40px 20px; background-color: #f9fafb; }
-        .container { background-color: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); max-width: 800px; margin: auto; }
-        h1 { color: #1e293b; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
-        h2 { color: #334155; margin-top: 30px; }
-        p { margin-bottom: 15px; color: #475569; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.8; color: #334155; margin: 0 auto; padding: 40px 20px; background-color: #f8fafc; }
+        .container { background-color: #ffffff; padding: 50px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); max-width: 850px; margin: auto; border: 1px solid #e2e8f0; }
+        .header-logo { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; }
+        .header-logo img { width: 60px; height: 60px; border-radius: 12px; }
+        h1 { color: #0f172a; margin: 0; font-size: 2.2rem; }
+        h2 { color: #1e293b; margin-top: 35px; font-size: 1.4rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px; }
+        p, li { margin-bottom: 15px; color: #475569; font-size: 1.05rem; }
+        ul { margin-bottom: 20px; padding-left: 20px; }
+        strong { color: #0f172a; }
+        code { background-color: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; color: #2563eb; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Privacy Policy</h1>
-        <p><strong>Last updated: May 2026</strong></p>
-        <p>AutoSharVid ("we", "our", or "us") operates this tool to automate video publishing. This Privacy Policy explains how we collect, use, and protect your information when you use our TikTok integration.</p>
+        <div class="header-logo">
+            <img src="logo.png" alt="AutoSharVid Logo" onerror="this.style.display='none'">
+            <div>
+                <h1>Privacy Policy</h1>
+                <p style="margin: 0; color: #64748b; font-size: 0.95rem;"><strong>Effective Date:</strong> May 28, 2026</p>
+            </div>
+        </div>
+
+        <p>AutoSharVid ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our video scheduling and automation platform (the "Service"), specifically concerning our integration with the TikTok API.</p>
         
         <h2>1. Information We Collect</h2>
-        <p>When you authenticate with TikTok through our tool, we receive an authorized access token. We DO NOT collect, store, or process your personal data, passwords, or browsing history.</p>
+        <p>To provide our automated publishing services, we require certain permissions from your TikTok account. When you authenticate through TikTok, we request the following scopes and collect the associated data:</p>
+        <ul>
+            <li><strong>Basic Account Information (<code>user.info.basic</code>):</strong> We collect your display name and profile avatar. This is strictly used to display your connected account within your AutoSharVid dashboard so you can identify which account you are managing.</li>
+            <li><strong>Authentication Tokens:</strong> We securely collect and store OAuth Access Tokens and Refresh Tokens provided by TikTok. These tokens act as digital keys allowing our system to perform actions on your behalf.</li>
+            <li><strong>Video Content:</strong> We temporarily process the video files and metadata (captions, hashtags) you upload to our platform strictly for the purpose of scheduling and publishing them.</li>
+        </ul>
+        <p>We <strong>do not</strong> collect your TikTok password, browsing history, or personal demographic data.</p>
         
         <h2>2. How We Use Your Information</h2>
-        <p>The TikTok access token is used strictly and exclusively for uploading and publishing videos directly to your TikTok account on your behalf, utilizing the TikTok Content Posting API.</p>
+        <p>We use the collected information exclusively to operate and provide the Service:</p>
+        <ul>
+            <li><strong>Publishing Content (<code>video.publish</code>):</strong> We use your access token to transmit and publish your scheduled videos directly to your TikTok account at the dates and times you specify.</li>
+            <li><strong>Account Management:</strong> To maintain your session and ensure the correct videos are posted to the correct authenticated accounts.</li>
+            <li><strong>Service Improvement:</strong> To monitor the success or failure rates of scheduled posts (e.g., tracking API error codes) to improve system reliability.</li>
+        </ul>
         
-        <h2>3. Data Sharing & Security</h2>
-        <p>We deeply respect your privacy. We do not sell, trade, or transfer your information to any outside parties. We implement strict security measures in our automated workflows to protect your access tokens. Tokens are securely processed and never exposed publicly.</p>
+        <h2>3. Data Retention and Security</h2>
+        <p>We implement robust, industry-standard encryption and security protocols to protect your authentication tokens from unauthorized access.</p>
+        <ul>
+            <li><strong>Tokens:</strong> Your Access and Refresh tokens are stored securely in our database and are automatically deleted if you terminate your account with us.</li>
+            <li><strong>Video Files:</strong> Video files uploaded to AutoSharVid are stored only temporarily in our secure cloud storage until they are successfully published to TikTok. Once published, the media files are permanently deleted from our servers to protect your content and save space.</li>
+        </ul>
+        
+        <h2>4. Data Sharing and Disclosure</h2>
+        <p>We deeply respect your privacy. <strong>We do not sell, rent, or trade your personal information or authentication tokens to any third parties.</strong> Your data is shared only with TikTok's official API for the sole purpose of fulfilling your scheduling requests. We may disclose information if required to do so by law or in response to valid requests by public authorities.</p>
+        
+        <h2>5. Your Data Rights and Revocation</h2>
+        <p>You have full control over your data:</p>
+        <ul>
+            <li><strong>Revoking Access:</strong> You can revoke AutoSharVid's access to your TikTok account at any time by navigating to your TikTok App settings (Settings and privacy > Security and login > Manage app permissions) and removing AutoSharVid. This immediately invalidates our tokens.</li>
+            <li><strong>Account Deletion:</strong> You may request the complete deletion of your AutoSharVid account and all associated data by contacting our support team.</li>
+        </ul>
+
+        <h2>6. Changes to This Privacy Policy</h2>
+        <p>We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify users of any material changes by updating the "Effective Date" at the top of this policy.</p>
+
+        <h2>7. Contact Us</h2>
+        <p>If you have any questions, concerns, or requests regarding this Privacy Policy or your data, please contact us at:</p>
+        <p><strong>Email:</strong> privacy@autosharvid.com<br>
+        <strong>Website:</strong> https://bigromio.github.io/autosharvid/</p>
     </div>
 </body>
 </html>
